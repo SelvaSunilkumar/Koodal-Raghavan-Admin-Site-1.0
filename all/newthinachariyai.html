@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dhinachariyai -New</title>
+        <script type="text/javascript" src="./logs.js"></script>
+        <script type="text/javascript" src="./newthinachariyai.js"></script>
+  
+        <link rel="shortcut icon" type="image/icon" href="icons/title_icon.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="topelement">
+                <h2>Dhinachariyai</h2>
+                <p>Update the Server and Users with new set of Audios and Data...</p>
+                <div class="boxform">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="date">Date : </label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="heading">Heading : </label>
+                            <input type="text" class="form-control" id="heading" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="heading">Tamil Month : </label>
+                                <input type="text" class="form-control" id="tml_month" required>
+                                <label for="heading">Tamil Date : </label>
+                                <input type="number" class="form-control" id="tml_date" required>
+                                <label for="heading">Tamil Day : </label>
+                                <input type="text" class="form-control" id="day" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="thidhi">Thidhi</label>
+                            <input type="text" class="form-control" id="thidhi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="star">Star</label>
+                            <input type="text" class="form-control" id="star" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event">Event</label>
+                            <textarea class="form-control" id="event" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label>Attach File</label>
+                                    <input type="file" id="file" class="form-control">
+                                    <progress id="progress" value="1" max="100" style="width: 100%; height: 10px;"></progress>
+                                </div>
+                                <div class="form-group">
+                                    <label>Attachment Title</label>
+                                    <input type="text" id="title" class="form-control">
+                                    <p id="status">0% uploaded</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label>Attach File</label>
+                                    <input type="file" id="file1" class="form-control">
+                                    <progress id="progress1" value="1" max="100" style="width: 100%; height: 10px;"></progress>
+                                </div>
+                                <div class="form-group">
+                                    <label>Attachment Title</label>
+                                    <input type="text" id="title1" class="form-control">
+                                    <p id="status1">0% uploaded</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label>Attach File</label>
+                                    <input type="file" id="file2" class="form-control">
+                                    <progress id="progress2" value="1" max="100" style="width: 100%; height: 10px;"></progress>
+                                </div>
+                                <div class="form-group">
+                                    <label>Attachment Title</label>
+                                    <input type="text" id="title2" class="form-control">
+                                    <p id="status2">0% uploaded</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <progress class="form-control" id="progressbar" value="1" max="100" style="width: 100%; height: 10px;"></progress>
+                            <p id="final"></p>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="upload" type="button" value="Update" action="javascript:void(0)" onclick="validateForm()">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <style>
+        input[type=button] {
+            background: rgb(66, 190, 87);
+            color: #fff;
+            transition: 1s;
+        }
+        input[type=button]:hover {
+            background: rgb(75, 98, 173);
+        }
+    </style>
+</html>

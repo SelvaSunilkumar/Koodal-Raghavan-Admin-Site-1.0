@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Thinam Oru Nalvarthai Audio - New</title>
+        <link rel="shortcut icon" type="image/icon" href="icons/title_icon.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script text="text/javascript" src="./logs.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            function _(el) {
+                return document.getElementById(el);
+            }
+            
+            var ip;
+            var user = localStorage.getItem("user");
+
+            function refresh() {
+                window.location.reload();
+            }
+
+            function goHome() {
+                window.location.href = "./home.html";
+            }
+
+            function uploadFile() {
+                if (user == "user") {
+                    var file = _("file").files[0];
+                    var folder = _("foldername").value;
+                    var filename = _("filename").value;
+                    var formdata = new FormData();
+                    formdata.append("file",file);
+                    formdata.append("filename",filename);
+                    formdata.append("foldername",folder);
+                    $.ajax({
+                        xhr:function() {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress",function(evt){
+                                if(evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    //$("#progressbar").width(Math.round(percentComplete)+'%');
+                                    _("progressbar").value = Math.round(percentComplete);
+                                    $("#status").html(Math.round(percentComplete)+'%');
+                                }
+                            },false);
+                            return xhr;
+                        },
+                        url:"php/newnalvarthaiaudio.php",
+                        method:"POST",
+                        data:formdata,
+                        contentType:false,
+                        cache:false,
+                        processData:false,
+                        beforeSend:function() {
+                            //$("#progressbar").width('0%');
+                            _("progressbar").value=0;
+                        },
+                        success:function(data) {
+                            $("#status").html(data);
+                            logLoader(user + ">>New Nalvarthai Audio>>" + folder + ">>"+ data);
+                        },
+                        error:function() {
+                            $("#status").html("Upload error");
+                            logLoader(user + ">>New Nalvarthai Audio>>Upload Error");
+                        }
+                    });
+                    /*var ajax = new XMLHttpRequest();
+                    ajax.upload.addEventListener("progress",progressHandler,false);
+                    ajax.addEventListener("load",completeHandler,false);
+                    ajax.addEventListener("error",errorHandler,false);
+                    ajax.addEventListener("abort",abortHandler,false);
+                    ajax.open("POST","php/newnalvarthaiaudio.php");
+                    ajax.send(formdata);*/
+                } else {
+                    logLoader(user + ">>New Nalvarthai Audio>>Access Denied");
+                }
+            }
+
+            /*function progressHandler(event) {   
+                var percent = (event.loaded / event.total) * 100;
+                _("progressbar").value = Math.round(percent);
+                _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+            }
+
+            function completeHandler(event) {
+                _("status").innerHTML = event.target.responseText;
+                _("progressbar").value = 0;
+                logLoader(user + ">>New Nalvarthai Audio>>" + event.target.responseText + ">> in " + _("foldername").value + " Folder");
+            }
+
+            function errorHandler(event) {
+                _("status").innerHTML = "Upload Failed";
+                logLoader(user + ">>New Nalvarthai Audio>>Upload Error>> in " + _("foldername").value + " Folder");
+            }
+
+            function abortHandler(event) {
+                _("status").innerHTML = "Upload Aborted/Interrupted";
+                logLoader(user + ">>New Nalvarthai Audio>>Upload Aborted/Interpreted>> in " + _("foldername").value + " Folder");
+            }*/
+        </script>
+    </head>
+    <div class="container">
+        <div class="topelement">
+            <h2>Thinam Oru Nalvarthai -Audio</h2>
+            <p>Update the Server with new set of Files and Data</p>
+            <div class="boxform">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="foldername">Folder Name :</label>
+                        <select class="form-control" id="foldername">
+                            <option value="null">-- Select a Folder --</option>
+                            <option value="Thinam oru nal vaarthai thirumaalai patri">Thinam oru nal vaarthai thirumaalai patri</option>
+                            <option value="Thinam Oru Nal Vaarthai">Thinam Oru Nal Vaarthai </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filename">File Name : </label>
+                        <input type="text" id="filename" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="file">Attachment : </label>
+                        <input type="file" id="file" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form_submit" action="javascript:void(0)" type="button" value="Upload Data" id="submit" onclick="uploadFile()">
+                        <input class="form_submit" action="javascript:void(0)" type="button" value="Refresh" id="submit" onclick="refresh()">
+                        <input class="newwindow" action="javascript:void(0)" type="button" value="Go Home" id="submit" onclick="goHome()">
+                    </div>
+                    <div class="form-group">
+                        <progress id="progressbar" value="0" max="100" style="width: 100%; height: 10px;"></progress>
+                        <p id="status" class="form-control"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style>
+
+        .boxform {
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form_submit {
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: rgb(60, 187, 77);
+            color: #fff;
+        }
+
+        .form_submit:hover {
+            color: #000;
+        }
+
+        .newwindow {
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: rgb(58, 118, 187);
+            color: #fff;
+        }
+
+        .newwindow:hover {
+            color: #000;
+        }
+
+    </style>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Boy Baby -New</title>
+        <script type="text/javascript" src="./logs.js"></script>
+        <link rel="shortcut icon" type="image/icon" href="icons/title_icon.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            
+            function _(el) {
+                return document.getElementById(el);
+            }
+
+            var user = localStorage.getItem("user");
+            function uploadName() {
+                if (user == "user") {
+                    var name = _("name").value;
+                    var formdata = new FormData();
+                    formdata.append("name",name);
+                    var ajax = new XMLHttpRequest();
+                    ajax.addEventListener("load",completeUploadHandler,false);
+                    ajax.open("POST","php/newbabyboy.php");
+                    ajax.send(formdata);
+                } else {
+                    logLoader(user + ">>New Boy Baby Name>>Access Denied ");
+                }
+            }
+
+            function completeUploadHandler(event) {
+                _("status").innerHTML = event.target.responseText;
+                _("progressbar").value = "100";
+                var result = event.target.responseText;
+                if ( result == "Updated") {
+                    logLoader(user + ">>New Boy Baby Name>>Name Updated");
+                } else {
+                    logLoader(user + ">>New Boy Baby Name>>Name not Updated");
+                }
+            }
+
+            function go() {
+                logLoader(user + ">>View Boy Baby Name>>Access Granted");
+                window.location.href = "./boybaby.php";
+            }
+
+        </script>
+        
+    </head>
+    <body>
+        <div class="container">
+            <div class="topelement">
+                <h2>Baby Names -Boy</h2>
+                <p>Update the Server and Users with new Baby Names</p>
+                <div class="boxform">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="babyname">New Name : </label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-inline">
+                            <input type="button" value="Create Name" action="javascript:void(0)" onclick="uploadName()">
+                            <input type="button" value="View Names" action="javascript:void(0)" onclick="go()">
+                        </div>
+                        <div class="form-group">
+                            <progress id="progressbar" value="0" max="100" style="width: 100%; height: 10px;"></progress>
+                            <p id="status" class="form-control"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <style>
+        .boxform {
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type=button] {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background: rgb(60, 187, 77);
+            color: #fff;
+        }
+        input[type=button]:hover {
+            color: black;
+        }
+    </style>
+</html>

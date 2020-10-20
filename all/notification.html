@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function _(el) {
+                return document.getElementById(el);
+            }
+
+            function sendNotification() {
+                var title = _("title").value;
+                var message = _("message").value;
+
+                alert(message);
+
+                if (title == "" || message == "") {
+                    window.alert("Some Important fields are Missing..");
+                    if (title == "") {
+                        _("title").style.borderColor = "#f01313";
+                    }
+                    if (message == "") {
+                        _("message").style.borderColor = "#f01313";
+                    }
+                } else {
+                    var formdata = new FormData();
+                    formdata.append("title",title);
+                    formdata.append("message",message);
+                    var ajax = new XMLHttpRequest();
+                    ajax.addEventListener("load",completeHandler,false);
+                    ajax.open("POST","php/notifier.php");
+                    ajax.send(formdata);
+                }
+            }
+
+            function completeHandler(event) {
+                _("status").innerHTML = event.target.responseText;
+                var message = event.target.responseText;
+                var title = _("title").value;
+                var description = _("message").value;
+                var content = "title:" + title + ">>Notification Message : " + description + ">>Server Response : " + message;
+                var formdata = new FormData();
+                //window.alert(content);
+                formdata.append("message",content);
+                var ajax = new XMLHttpRequest();
+                ajax.addEventListener("load",notificationEvent,false);
+                ajax.open("POST","php/notificationlogs.php");
+                ajax.send(formdata);
+            }
+
+            function notificationEvent(event) {
+                window.alert("Notification Send");
+            }
+
+        </script>
+        <title>Admin Authentication - Koodal Raghavan App</title>
+        <link rel="shortcut icon" type="image/icon" href="./icons/title_icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="topelement">
+                <h2>Send Notification</h2>
+                <p><b>Send</b> single notification to active users, by Entering value into <b>Title</b> and <b>Message</b></p>
+
+                <div class="boxform">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="title">Title : </label>
+                            <input type="text" id="title" class="form-control" placeholder="Title to be Displayed on the Notification box">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message : </label>
+                            <textarea class="form-control" id="message" placeholder="Enter the message to be Displayed on the Notification box"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="button" value="Send Notification" action="javascript:void(0)" onclick="sendNotification()">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Notification Status : </label>
+                            <textarea class="form-control" id="status" readonly>Status : No Notifications so far.</textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <style>
+
+        input[type=button] {
+            background-color: #e60b78;
+            color: #fff;
+            transition: .8s;
+        }
+
+        input[type=button]:hover {
+            background: #246ed6;
+        }
+
+    </style>
+</html>

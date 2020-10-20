@@ -1,0 +1,10 @@
+::1 	 12/10/20 15:48PM 	 title:Title>>Notification Message : message>>Server Response : <br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'tpvstestusr'@'localhost' (using password: YES) in <b>C:\xampp\htdocs\Admin App\all\php\dbconnector.php</b> on line <b>8</b><br />
+<br />
+<b>Warning</b>:  mysqli_query() expects parameter 1 to be mysqli, bool given in <b>C:\xampp\htdocs\Admin App\all\php\notifier.php</b> on line <b>42</b><br />
+<br />
+<b>Warning</b>:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in <b>C:\xampp\htdocs\Admin App\all\php\notifier.php</b> on line <b>45</b><br />
+<br />
+<b>Warning</b>:  mysqli_close() expects parameter 1 to be mysqli, bool given in <b>C:\xampp\htdocs\Admin App\all\php\notifier.php</b> on line <b>52</b><br />
+"registration_ids" field cannot be empty
+ ::1 	 12/10/20 15:49PM 	 title:Title>>Notification Message : message>>Server Response : {"multicast_id":5463328733364472110,"success":1,"failure":0,"canonical_ids":0,"results":[{"message_id":"0:1602510555515661%f00b4edef00b4ede"}]} ::1 	 12/10/20 18:37PM 	 title:wcd>>Notification Message : dw>>Server Response : {"multicast_id":2301558348055794092,"success":1,"failure":0,"canonical_ids":0,"results":[{"message_id":"0:1602520669585654%f00b4edef00b4ede"}]} 
